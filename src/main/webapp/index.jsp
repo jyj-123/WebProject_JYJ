@@ -100,7 +100,7 @@ out.println("JSP로 변경하기");
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href=".jsp" class="dropdown-item">Free Board</a>
                             <a href=".jsp" class="dropdown-item">Q&A Board</a>
-                            <a href=".jsp" class="dropdown-item">Resource Board</a>
+                            <a href="board/listPage.do" class="dropdown-item">Resource Board</a>
                         </div>
                      </div>
                 </div>

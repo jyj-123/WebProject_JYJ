@@ -21,15 +21,15 @@ public class MemberDAO extends JDBConnect {
     // 회원 인증을 위한 메서드
     public MemberDTO getMemberDTO(String uid, String upass) {
         MemberDTO dto = new MemberDTO();
-        String query = "SELECT * FROM users WHERE user_id=? AND password=?";
+        String query = "SELECT * FROM users WHERE id=? AND pwd=?";
         try {
             psmt = con.prepareStatement(query);
             psmt.setString(1, uid);
             psmt.setString(2, upass);
             rs = psmt.executeQuery();
             if (rs.next()) {
-                dto.setId(rs.getString("user_id"));
-                dto.setPwd(rs.getString("password"));
+                dto.setId(rs.getString("id"));
+                dto.setPwd(rs.getString("pwd"));
                 dto.setName(rs.getString("name"));
                 dto.setEmail(rs.getString("email"));
                 dto.setPhone(rs.getString("phone_number"));
@@ -51,8 +51,8 @@ public class MemberDAO extends JDBConnect {
     public boolean registerMember(MemberDTO memberDTO) {
         boolean isSuccess = false;
         String query = """
-            INSERT INTO users (user_id, password, name, email, phone_number, created_at, updated_at, status)
-            VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'active')
+            INSERT INTO users (id, pwd, name, email, phone_number, created_at, updated_at, status)
+            VALUES (?, ?, ?, ?, ?, SYSDATE, SYSDATE, 'active')
             """;
         try {
             psmt = con.prepareStatement(query);
@@ -80,14 +80,14 @@ public class MemberDAO extends JDBConnect {
         if (memberDTO.getPwd() != null && !memberDTO.getPwd().isEmpty()) {
             query = """
                 UPDATE users 
-                SET name=?, email=?, phone_number=?, password=?, updated_at=SYSDATE 
-                WHERE user_id=?
+                SET name=?, email=?, phone_number=?, pwd=?, updated_at=SYSDATE 
+                WHERE id=?
                 """;
         } else {
             query = """
                 UPDATE users 
                 SET name=?, email=?, phone_number=?, updated_at=SYSDATE 
-                WHERE user_id=?
+                WHERE id=?
                 """;
         }
 

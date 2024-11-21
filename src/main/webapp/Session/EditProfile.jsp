@@ -80,7 +80,7 @@
                         %>
                             <script>
                                 alert("로그인이 필요합니다.");
-                                window.location.href = "../Login.jsp";
+                                window.location.href = "LoginForm.jsp";
                             </script>
                         <%
                         } else {
@@ -96,27 +96,27 @@
                                 <div class="form-floating mb-3">
                                     아이디
                                     <label for="user_id"></label>
-                                    <input type="text" class="form-control" id="user_id" name="UserId" value="<%= userId %>" required style="padding: 0.5rem;" />
+                                    <input type="text" class="form-control" id="id" name="UserId" value="<%= userId %>" required style="padding: 0.5rem;" />
                                 </div>
                                 <div class="form-floating mb-3">
                                     이름
                                     <label for="user_name"></label>
-                                    <input type="text" class="form-control" id="user_name" name="user_name" value="<%= userName %>" required style="padding: 0.5rem;" />
+                                    <input type="text" class="form-control" id="name" name="user_name" value="<%= userName %>" required style="padding: 0.5rem;" />
                                 </div>
                                 <div class="form-floating mb-3">
                                     이메일
                                     <label for="user_email"></label>
-                                    <input type="email" class="form-control" id="user_email" name="user_email" value="<%= userEmail %>" required style="padding: 0.5rem;" />
+                                    <input type="email" class="form-control" id="email" name="user_email" value="<%= userEmail %>" required style="padding: 0.5rem;" />
                                 </div>
                                 <div class="form-floating mb-3">
                                     전화번호
                                     <label for="user_phone"></label>
-                                    <input type="text" class="form-control" id="user_phone" name="user_phone" value="<%= userPhone %>" style="padding: 0.5rem;" />
+                                    <input type="text" class="form-control" id="phone" name="user_phone" value="<%= userPhone %>" style="padding: 0.5rem;" />
                                 </div>
                                 <div class="form-floating mb-3">
                                     새 비밀번호 (변경 시 입력)
                                     <label for="user_pw"></label>
-                                    <input type="password" class="form-control" id="user_pw" name="user_pw" style="padding: 0.5rem;" />
+                                    <input type="password" class="form-control" id="pwd" name="user_pw" style="padding: 0.5rem;" />
                                 </div>
                                 <button type="submit" class="btn btn-primary py-3 w-100 mb-4">수정하기</button>
                             </form>

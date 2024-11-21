@@ -11,9 +11,9 @@
         <% } %>
             <!-- 모델2 방식의 파일첨부 게시판 -->
             &nbsp;&nbsp;&nbsp; 
-            <a href="../mvcboard/list.do">게시판(페이징X)</a>
+            <a href="../board/list.do">게시판(페이징X)</a>
             &nbsp;&nbsp;&nbsp; 
-            <a href="../mvcboard/listPage.do">게시판(페이징O)</a>
+            <a href="../board/listPage.do">게시판(페이징O)</a>
         </td>
     </tr>
 </table>

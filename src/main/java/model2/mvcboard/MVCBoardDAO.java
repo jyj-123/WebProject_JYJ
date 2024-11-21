@@ -18,7 +18,7 @@ public class MVCBoardDAO  extends DBConnPool{
 	public int selectCount(Map<String, Object> map) {
 		int totalCount = 0;
 		//오라클의 그룹함수는 count()를 사용해서 쿼리문 작성
-		String query = "SELECT COUNT(*) FROM mvcboard";
+		String query = "SELECT COUNT(*) FROM board";
 		//매개변수로 전달된 검색어가 있는 경우에만 where절을 동적으로 추가
 		if (map.get("searchWord") != null) {
 			query += " WHERE " + map.get("searchField") + " "
@@ -49,10 +49,10 @@ public class MVCBoardDAO  extends DBConnPool{
 		List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
 		
 		//레코드 인출을 위한 쿼리문 작성
-		String query = "SELECT * FROM mvcboard";
+		String query = "SELECT * FROM board";
 		//검색어 입력 여부에 따라서 where절은 조건부로 추가됨.
 		if (map.get("searchWord") != null) {
-			query += " WHERE " + map.get("serchField")
+			query += " WHERE " + map.get("searchField")
 					+ " LIKE '%" + map.get("searchWord") + "%' ";
 		}
 		// 일련번호의 내림차순으로 정렬한 후 인출한다.
@@ -103,7 +103,7 @@ public class MVCBoardDAO  extends DBConnPool{
 			/* default값이 있는 3개의 컬럼을 제외한 나머지 컬럼에 대해서만
 			 * insert쿼리문을 작성. 일련번호 idx의 경우에는 시퀀스를 사용*/
 			String query =
-					"INSERT INTO mvcboard ( "
+					"INSERT INTO board ( "
 					+ " idx, id, title, content, ofile, sfile)"
 					+ " VALUES ( "
 					+ " seq_board_num.NEXTVAL,?,?,?,?,?)";
@@ -130,8 +130,8 @@ public class MVCBoardDAO  extends DBConnPool{
 		//인출한 레코드를 저장하기 위해 DTO 생성
 		MVCBoardDTO dto = new MVCBoardDTO();
 		//내부조인(Inner join)을 이용해서 쿼리문 작성. member테이블의 name컬럼까지 포함.
-		String query = "SELECT Bo.*, Me.name FROM mvcboard Bo "
-				+ " INNER JOIN member Me ON Bo.id=Me.id"
+		String query = "SELECT Bo.*, Us.name FROM board Bo "
+				+ " INNER JOIN users Us ON Bo.id=Us.id"
 				+ " WHERE idx=?"; // 쿼리문 템플릿 준비
 		try {
 			psmt = con.prepareStatement(query); //쿼리문 준비
@@ -164,7 +164,7 @@ public class MVCBoardDAO  extends DBConnPool{
 	public void updateVisitCount(String idx) {
 		//visitcount 컬럼은 number타입이므로 산술연산이 가능함.
 		//1을 더한 결과를 컬럼에 재반영하는 형식으로 update 쿼리문 작성.
-		String query = "UPDATE mvcboard SET "
+		String query = "UPDATE board SET "
 				+ " visitcount=visitcount+1"
 				+ " WHERE idx=?";
 		try {
@@ -187,7 +187,7 @@ public class MVCBoardDAO  extends DBConnPool{
 		}
 	}
 	public void downCountPlus(String idx) {
-    	String sql = "UPDATE mvcboard SET "
+    	String sql = "UPDATE board SET "
     			+ " downcount=downcount+1 "
     			+ " WHERE idx=? ";
     	try {
@@ -201,7 +201,7 @@ public class MVCBoardDAO  extends DBConnPool{
 	public int deletePost(String idx) {
 		int result = 0;
 		try {
-			String query = "DELETE FROM mvcboard WHERE idx=?";
+			String query = "DELETE FROM board WHERE idx=?";
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, idx);
 			result = psmt.executeUpdate();
@@ -218,7 +218,7 @@ public class MVCBoardDAO  extends DBConnPool{
 		int result = 0;
 		try {
 			// 쿼리문 템플릿 준비. 회원제이므로 일련번호와 아이디까지 조건에 추가.
-			String qurey = "UPDATE mvcboard"
+			String qurey = "UPDATE board"
 					+ " SET title=?, content=?, ofile=?, sfile=? "
 					+ " WHERE idx=? and id=?";
 			
@@ -247,14 +247,14 @@ public class MVCBoardDAO  extends DBConnPool{
         List<MVCBoardDTO> board = new Vector<MVCBoardDTO>();
         String query = 
               " SELECT * FROM ("
-             + " SELECT Tb.*, ROWNUM rNUM FROM ("
-             + "   SELECT * FROM mvcboard ";
+             + " SELECT Bo.*, ROWNUM rNUM FROM ("
+             + "   SELECT * FROM board ";
         if(map.get("searchWord") !=null) {
            query +=" WHERE " + map.get("searchField")
                 + " LIKE '%" + map.get("searchWord")+ "%'";
         }
         query += "   ORDER BY idx DESC "
-              + "   ) Tb "
+              + "   ) Bo "
               + " ) "
               + " WHERE rNum BETWEEN ? AND ?";
         try {
@@ -266,15 +266,15 @@ public class MVCBoardDAO  extends DBConnPool{
            while (rs.next()) {
               MVCBoardDTO dto = new MVCBoardDTO();
               
-              dto.setId(rs.getString(1));
-              dto.setId(rs.getString(2));
-              dto.setTitle(rs.getString(3));
-              dto.setContent(rs.getString(4));
-              dto.setPostdate(rs.getDate(5));
-              dto.setOfile(rs.getString(6));
-              dto.setSfile(rs.getString(7));
-              dto.setDowncount(rs.getInt(8));
-              dto.setVisitcount(rs.getInt(9));
+              dto.setIdx(rs.getString("idx"));
+              dto.setId(rs.getString("id"));
+              dto.setTitle(rs.getString("title"));
+              dto.setContent(rs.getString("content"));
+              dto.setPostdate(rs.getDate("postdate"));
+              dto.setOfile(rs.getString("ofile"));
+              dto.setSfile(rs.getString("sfile"));
+              dto.setDowncount(rs.getInt("downcount"));
+              dto.setVisitcount(rs.getInt("visitcount"));
               
               board.add(dto);
            }
