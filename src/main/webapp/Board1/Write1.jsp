@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>자료실 게시판 - 수정하기</title>
+<title>게시판게시판 - 글쓰기</title>
 
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
@@ -38,11 +38,12 @@
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border: 1px solid #dee2e6; /* 경계선 추가 */
+        border: 1px solid #dee2e6;
     }
     h2 {
         font-size: 1.8em;
         margin-bottom: 20px;
+        text-align: center;
     }
     table {
         width: 100%;
@@ -53,7 +54,7 @@
         padding: 12px;
         text-align: left;
         vertical-align: middle;
-        border: 1px solid #dee2e6; /* 테이블 셀 경계선 추가 */
+        border: 1px solid #dee2e6;
         background-color: #f9f9f9;
     }
     td:first-child {
@@ -120,28 +121,20 @@
 </head>
 <body>
 <div class="container">
-    <h2>자료실 게시판 - 수정하기(Edit)</h2>
-    <form name="writeFrm" method="post" enctype="multipart/form-data" action="../board/edit.do" onsubmit="return validateForm(this);">
-
-        <!-- 수정할 게시물의 일련번호 -->
-        <input type="hidden" name="idx" value="${ dto.idx }" />
-        <!-- 게시물의 작성자 아이디 -->
-        <input type="hidden" name="id" value="${ dto.id }" />
-        <!-- 기존 게시물의 파일명 -->
-        <input type="hidden" name="prevOfile" value="${ dto.ofile }" />
-        <input type="hidden" name="prevSfile" value="${ dto.sfile }" />
-
+    <h2> 자유게시판 - 글쓰기(Write)</h2>
+    <form name="writeFrm" method="post" enctype="multipart/form-data" 
+          action="../board1/write1.do" onsubmit="return validateForm(this);">
         <table>
             <tr>
                 <td>제목</td>
                 <td>
-                    <input type="text" name="title" value="${ dto.title }" />
+                    <input type="text" name="title" />
                 </td>
             </tr>
             <tr>
                 <td>내용</td>
                 <td>
-                    <textarea name="content" rows="5">${ dto.content }</textarea>
+                    <textarea name="content" rows="5"></textarea>
                 </td>
             </tr>
             <tr>
@@ -154,7 +147,7 @@
                 <td colspan="2" style="text-align: center;">
                     <button type="submit">작성 완료</button>
                     <button type="reset">RESET</button>
-                    <button type="button" onclick="location.href='../board/listPage.do';">목록 바로가기</button>
+                    <button type="button" onclick="location.href='../board1/listPage1.do';">목록 바로가기</button>
                 </td>
             </tr>
         </table>

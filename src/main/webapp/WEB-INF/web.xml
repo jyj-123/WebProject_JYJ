@@ -91,6 +91,24 @@
   	<url-pattern>/board/list.do</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>MVCBoardList1</servlet-name>
+  	<servlet-class>model2.mvcboard1.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<url-pattern>/board1/list1.do</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>MVCBoardList2</servlet-name>
+  	<servlet-class>model2.mvcboard2.ListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardList</servlet-name>
+  	<url-pattern>/board2/list2.do</url-pattern>
+  </servlet-mapping>
+  
   <!-- 모델2 방식의 게시판 목록 매핑 - 페이징 기능 추가 -->
   <servlet>
   	<servlet-name>MVCBoardListPage</servlet-name>
@@ -100,6 +118,27 @@
   	<servlet-name>MVCBoardListPage</servlet-name>
   	<url-pattern>/board/listPage.do</url-pattern>
   </servlet-mapping>
+  
+  <!-- 모델2 방식의 게시판 목록 매핑 - 페이징 기능 추가 -->
+  <servlet>
+  	<servlet-name>MVCBoardListPage1</servlet-name>
+  	<servlet-class>model2.mvcboard1.ListPageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardListPage1</servlet-name>
+  	<url-pattern>/board1/listPage1.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 모델2 방식의 게시판 목록 매핑 - 페이징 기능 추가 -->
+  <servlet>
+  	<servlet-name>MVCBoardListPage2</servlet-name>
+  	<servlet-class>model2.mvcboard2.ListPageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardListPage2</servlet-name>
+  	<url-pattern>/board2/listPage2.do</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- 글쓰기 페이지 매핑 -->
   <servlet>
@@ -114,6 +153,36 @@
   <servlet-mapping>
   	<servlet-name>MVCBoardWrite</servlet-name>
   	<url-pattern>/board/write.do</url-pattern>
+  </servlet-mapping>
+  
+    <!-- 글쓰기 페이지 매핑 -->
+  <servlet>
+  	<servlet-name>MVCBoardWrite1</servlet-name>
+  	<servlet-class>model2.mvcboard1.WriteController</servlet-class>
+  	<!-- 첨부파일에 대한 용량설정 -->
+  	<multipart-config>
+  		<max-file-size>10485760</max-file-size> <!-- 10MB -->
+  		<max-request-size>10485760</max-request-size> <!-- 10MB -->
+  	</multipart-config>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardWrite1</servlet-name>
+  	<url-pattern>/board1/write1.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 글쓰기 페이지 매핑 -->
+  <servlet>
+  	<servlet-name>MVCBoardWrite2</servlet-name>
+  	<servlet-class>model2.mvcboard2.WriteController</servlet-class>
+  	<!-- 첨부파일에 대한 용량설정 -->
+  	<multipart-config>
+  		<max-file-size>10485760</max-file-size> <!-- 10MB -->
+  		<max-request-size>10485760</max-request-size> <!-- 10MB -->
+  	</multipart-config>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MVCBoardWrite2</servlet-name>
+  	<url-pattern>/board2/write2.do</url-pattern>
   </servlet-mapping>
   
   <!-- 게시판 페이징 처리를 위한 설정값 -->
@@ -133,6 +202,9 @@
         <url-pattern>*.jsp</url-pattern>
         <el-ignored>false</el-ignored>
     </jsp-property-group>
-	</jsp-config>
+  </jsp-config>
+		
 	
+
+   	
 </web-app>

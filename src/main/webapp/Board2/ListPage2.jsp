@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>자료실 게시판</title>
+    <title>Q&A 게시판</title>
 
     <!-- Favicon -->
     <link href="../img/favicon.ico" rel="icon">
@@ -109,7 +109,7 @@
 			<h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
 		</a>
     	
-        <h2 class="board-title">자료실 게시판</h2>
+        <h2 class="board-title">Q&A 게시판</h2>
 
         <!-- 검색 폼 -->
         <form method="get" class="search-form">
@@ -131,6 +131,7 @@
                     <th width="10%">조회수</th>
                     <th width="15%">작성일</th>
                     <th width="8%">다운로드</th>
+                    <th width="8%">댓글 여부</th>
                 </tr>
             </thead>
             <tbody>
@@ -145,15 +146,21 @@
                             <tr>
                                 <td>${map.totalCount - (((map.pageNum-1)* map.pageSize) + loop.index )}</td>
                                 <td align="left">
-                                    <a href="../board/view.do?idx=${ row.idx }">${row.title}</a>
+                                    <a href="../board2/view2.do?idx=${ row.idx }">${row.title}</a>
                                 </td>
                                 <td>${row.id}</td>
                                 <td>${row.visitcount}</td>
                                 <td>${row.postdate}</td>
                                 <td>
                                     <c:if test="${ not empty row.ofile }">
-                                        <a href="../board/download.do?ofile=${ row.ofile }&sfile=${row.sfile}&idx=${ row.idx }">[Down]</a>
+                                        <a href="../board2/download2.do?ofile=${ row.ofile }&sfile=${row.sfile}&idx=${ row.idx }">[Down]</a>
                                     </c:if>
+                                </td>
+                                <td>
+                                	<c:choose>
+                                		<c:when test="{ row.commentCount > 0 }">있음</c:when>
+                                		<c:otherwise>없음</c:otherwise>
+                                	</c:choose>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -165,7 +172,7 @@
         <!-- 하단 메뉴 -->
         <div class="d-flex justify-content-between mt-4">
             <div>${ map.pagingImg }</div>
-            <button type="button" class="btn btn-primary" onclick="location.href='../board/write.do';">글쓰기</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='../board2/write2.do';">글쓰기</button>
         </div>
     </div>
 

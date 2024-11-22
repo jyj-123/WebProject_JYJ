@@ -43,16 +43,24 @@
             margin-bottom: 20px;
             line-height: 1;
         }
+        
+        .text-primary {
+            font-size: 1.3em;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- 회원가입 시작 -->
-        <div class="container-fluid">
+        <div class="container-fluid">        	
             <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-                    <div class="register-form-container">
+                    <div class="register-form-container">                
+                    	<a href="../index.jsp" class="">
+							<h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>DASHMIN</h3>
+						</a>
+                    
                         <h3 class="register-title text-center">회원가입</h3>
 
                         <form action="RegisterProcess.jsp" method="post" name="registerFrm" onsubmit="return validateForm(this);">

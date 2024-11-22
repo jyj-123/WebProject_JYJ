@@ -1,4 +1,4 @@
-package model2.mvcboard;
+package model2.mvcboard1;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ public class WriteController extends HttpServlet{
 		}
 		
 		//로그인이 완료된 상태라면 쓰기페이지를 포워드한다.
-		req.getRequestDispatcher("/Board/Write.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board1/Write1.jsp").forward(req, resp);
 	}
 	
 	//글쓰기 처리
@@ -61,7 +61,7 @@ public class WriteController extends HttpServlet{
 		catch (Exception e) {
 			//문제가 있는 경우 예외처리
 			JSFunction.alertLocation(resp, "파일 업로드 오류입니다.",
-					"../board/write.do");
+					"../board1/write1.do");
 			return;
 		}
 		
@@ -94,11 +94,11 @@ public class WriteController extends HttpServlet{
 		//성공 or 실패?
 		if (result == 1) { //글쓰기 성공
 			//게시판 목록으로 이동
-			resp.sendRedirect("../board/listPage.do");
+			resp.sendRedirect("../board1/listPage1.do");
 		}
 		else { // 글쓰기 실패
 			//글쓰기 페이지로 다시 돌아간다.
-			JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../board/write.do");
+			JSFunction.alertLocation(resp, "글쓰기에 실패했습니다.", "../board1/write1.do");
 		}
 	}
 }

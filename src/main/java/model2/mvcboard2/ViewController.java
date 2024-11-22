@@ -1,6 +1,7 @@
-package model2.mvcboard;
+package model2.mvcboard2;
 
 import java.io.IOException;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,7 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 //열람하기(어노테이션을 이용한 매핑)
-@WebServlet("/board/view.do")
+@WebServlet("/board2/view2.do")
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -56,9 +57,17 @@ public class ViewController extends HttpServlet {
 		System.out.println("MIME타입="+ mimeType);
 		req.setAttribute("mimeType", mimeType);
 		
+		// 댓글 목록 가져오기
+        MVCBoard2CommentDAO commentDAO = new MVCBoard2CommentDAO();
+        List<MVCBoard2CommentDTO> commentList = commentDAO.selectComments(Integer.parseInt(idx));
+        commentDAO.close();
+        dao.close();
+
+		
 		//게시물(dto) 저장 후 뷰로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/Board/View.jsp").forward(req, resp);
+		req.setAttribute("commentList", commentList);
+		req.getRequestDispatcher("/Board2/View2.jsp").forward(req, resp);
 	}
 	
 	public boolean mimeContains(String[] strArr, String ext) {

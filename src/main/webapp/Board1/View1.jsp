@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>자료실 게시판 - 상세 보기</title>
+<title>자유게시판 - 상세 보기</title>
 
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
@@ -101,7 +101,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>자료실 게시판</h2>
+    <h2>자유게시판</h2>
 
     <table>
         <colgroup>
@@ -155,7 +155,7 @@
             <td>
                 <c:if test="${ not empty dto.ofile }">
                     ${ dto.ofile }
-                    <a href="../board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }" class="file-download">[다운로드]</a>
+                    <a href="../board1/download1.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }" class="file-download">[다운로드]</a>
                 </c:if>
             </td>
             <td>다운로드수</td>
@@ -166,10 +166,10 @@
         <tr>
             <td colspan="4" align="center">
                 <c:if test="${ UserId eq dto.id }">
-                    <button type="button" class="btn" onclick="location.href='../board/edit.do?idx=${param.idx}';">수정하기</button>
+                    <button type="button" class="btn" onclick="location.href='../board1/edit1.do?idx=${param.idx}';">수정하기</button>
                     <button type="button" class="btn btn-danger" onclick="deleteConfirm(${param.idx});">삭제하기</button>
                 </c:if>
-                <button type="button" class="btn" onclick="location.href='../board/listPage.do';">목록 바로가기</button>
+                <button type="button" class="btn" onclick="location.href='../board1/listPage1.do';">목록 바로가기</button>
             </td>
         </tr>
     </table>
@@ -180,7 +180,7 @@
     function deleteConfirm(idx) {
         let c = confirm("게시물을 삭제하시겠습니까?");
         if(c == true) {
-            location.href = "../board/delete.do?idx=" + idx;
+            location.href = "../board1/delete1.do?idx=" + idx;
         }
     }
 </script>

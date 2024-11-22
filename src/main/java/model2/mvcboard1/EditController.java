@@ -1,4 +1,4 @@
-package model2.mvcboard;
+package model2.mvcboard1;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
 //수정하기
-@WebServlet("/board/edit.do")
+@WebServlet("/board1/edit1.do")
 @MultipartConfig(
 		maxFileSize = 1024 * 1024 * 1,
 		maxRequestSize = 1024 * 1024 * 10
@@ -48,7 +48,7 @@ public class EditController extends HttpServlet{
 		
 		//작성자 본인이라면 request영역에 DTO를 저장 후 포워드한다.
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/Board/Edit.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board1/Edit1.jsp").forward(req, resp);
 	}
 	
 	//수정 처리
@@ -131,11 +131,11 @@ public class EditController extends HttpServlet{
 		//성공 or 실패?
 		if (result == 1) { //수정 성공
 			//수정에 성공하면 '열람'페이지로 이동해서 수정된 내용을 확인한다.
-			resp.sendRedirect("../board/view.do?idx=" + idx);
+			resp.sendRedirect("../board1/view1.do?idx=" + idx);
 		}
 		else { //수정 실패 : 경고창을 띄운다.
 			JSFunction.alertLocation(resp, "비밀번호 검증을 다시 진행해주세요.", 
-				"../board/view.do?idx=" + idx);
+				"../board1/view1.do?idx=" + idx);
 		}
 	}
 }

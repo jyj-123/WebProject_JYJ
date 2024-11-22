@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>자료실 게시판 - 상세 보기</title>
+<title>Q&A 게시판 - 상세 보기</title>
 
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
@@ -96,13 +96,31 @@
         max-width: 600px;
         margin: 20px 0;
     }
+    .comment-section {
+        margin-top: 30px;
+        border-top: 2px solid #dee2e6;
+        padding-top: 20px;
+    }
+    .comment {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    .comment .comment-author {
+        font-weight: bold;
+    }
+    .comment .comment-date {
+        font-size: 0.9em;
+        color: #888;
+    }
 </style>
 
 </head>
 <body>
 <div class="container">
-    <h2>자료실 게시판</h2>
+    <h2>Q&A 게시판</h2>
 
+    <!-- 게시글 정보 -->
     <table>
         <colgroup>
             <col width="15%" /> <col width="35%" />
@@ -155,7 +173,7 @@
             <td>
                 <c:if test="${ not empty dto.ofile }">
                     ${ dto.ofile }
-                    <a href="../board/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }" class="file-download">[다운로드]</a>
+                    <a href="../board2/download2.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }" class="file-download">[다운로드]</a>
                 </c:if>
             </td>
             <td>다운로드수</td>
@@ -166,24 +184,68 @@
         <tr>
             <td colspan="4" align="center">
                 <c:if test="${ UserId eq dto.id }">
-                    <button type="button" class="btn" onclick="location.href='../board/edit.do?idx=${param.idx}';">수정하기</button>
+                    <button type="button" class="btn" onclick="location.href='../board2/edit2.do?idx=${param.idx}';">수정하기</button>
                     <button type="button" class="btn btn-danger" onclick="deleteConfirm(${param.idx});">삭제하기</button>
                 </c:if>
-                <button type="button" class="btn" onclick="location.href='../board/listPage.do';">목록 바로가기</button>
+                <button type="button" class="btn" onclick="location.href='../board2/listPage2.do';">목록 바로가기</button>
             </td>
         </tr>
     </table>
-
-</div>
-
-<script>
-    function deleteConfirm(idx) {
-        let c = confirm("게시물을 삭제하시겠습니까?");
-        if(c == true) {
-            location.href = "../board/delete.do?idx=" + idx;
-        }
-    }
-</script>
+		<h3>댓글</h3>
+		<!-- 댓글 목록 출력 -->
+		<table border="1" width="90%">
+		    <tr>
+		        <th>작성자</th>
+		        <th>내용</th>
+		        <th>작성일</th>
+		        <th>관리</th>
+		    </tr>
+		    <c:forEach var="comment" items="${commentList}">
+		        <tr>
+		            <td>${comment.id}</td>
+		            <td>${comment.content}</td>
+		            <td>${comment.postdate}</td>
+		            <td>
+		                <c:if test="${comment.id == sessionScope.UserId}">
+						    <button type="button" onclick="location.href='/board2/commentEdit.do?idc=${comment.idc}&idx=${dto.idx}';">수정</button>
+						    <button type="button" onclick="deleteComment(${comment.idc}, ${dto.idx});">삭제</button>
+						</c:if>
+            		</td>
+		            
+		        </tr>
+		    </c:forEach>
+		</table>
+		
+		<!-- 댓글 작성 폼 -->
+		<form method="post" action="../board2/comment.do">
+		    <input type="hidden" name="idx" value="${dto.idx}" />
+		    <table width="90%">
+		        <tr>
+		            <td><textarea name="content" style="width: 100%; height: 60px;" placeholder="댓글을 입력하세요"></textarea></td>
+		        </tr>
+		        <tr>
+		            <td align="right">
+		                <button type="submit">댓글 작성</button>
+		            </td>
+		        </tr>
+		    </table>
+		</form>
+		
+		<script>
+		function deleteConfirm(idx){
+		   let c = confirm("게시물을 삭제하시겠습니까?");
+		   if(c==true){
+		      location.href="../board2/delete2.do?idx="+ idx;
+		   }
+		}
+		
+		function deleteComment(idc, idx) {
+		   let c = confirm("댓글을 삭제하시겠습니까?");
+		   if(c == true) {
+		      location.href = "../board2/commentdelete.do?idc=" + Idc + "&idx=" + Idx;
+		   }
+		}
+		</script>
 
 </body>
 </html>

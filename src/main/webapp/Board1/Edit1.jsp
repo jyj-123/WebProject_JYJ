@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>자료실 게시판 - 수정하기</title>
+<title>자유게시판 - 수정하기</title>
 
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
@@ -120,8 +120,8 @@
 </head>
 <body>
 <div class="container">
-    <h2>자료실 게시판 - 수정하기(Edit)</h2>
-    <form name="writeFrm" method="post" enctype="multipart/form-data" action="../board/edit.do" onsubmit="return validateForm(this);">
+    <h2>자유게시판 - 수정하기(Edit)</h2>
+    <form name="writeFrm" method="post" enctype="multipart/form-data" action="../board1/edit1.do" onsubmit="return validateForm(this);">
 
         <!-- 수정할 게시물의 일련번호 -->
         <input type="hidden" name="idx" value="${ dto.idx }" />
@@ -144,7 +144,7 @@
                     <textarea name="content" rows="5">${ dto.content }</textarea>
                 </td>
             </tr>
-            <tr>
+			<tr>
                 <td>첨부 파일</td>
                 <td>
                     <input type="file" name="ofile" />
@@ -154,7 +154,7 @@
                 <td colspan="2" style="text-align: center;">
                     <button type="submit">작성 완료</button>
                     <button type="reset">RESET</button>
-                    <button type="button" onclick="location.href='../board/listPage.do';">목록 바로가기</button>
+                    <button type="button" onclick="location.href='../board1/listPage1.do';">목록 바로가기</button>
                 </td>
             </tr>
         </table>

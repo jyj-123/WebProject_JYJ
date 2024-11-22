@@ -98,8 +98,8 @@ out.println("JSP로 변경하기");
                   	 <div class="nav-item dropdown">   
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Board</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href=".jsp" class="dropdown-item">Free Board</a>
-                            <a href=".jsp" class="dropdown-item">Q&A Board</a>
+                            <a href="board1/listPage1.do" class="dropdown-item">Free Board</a>
+                            <a href="board2/listPage2.do" class="dropdown-item">Q&A Board</a>
                             <a href="board/listPage.do" class="dropdown-item">Resource Board</a>
                         </div>
                      </div>

@@ -1,4 +1,4 @@
-package model2.mvcboard;
+package model2.mvcboard1;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpSession;
 import utils.JSFunction;
 
 //게시물 삭제 처리
-@WebServlet("/board/delete.do")
+@WebServlet("/board1/delete1.do")
 public class DeleteController extends HttpServlet {
    private static final long serialVersionUID = 1L; 
    
@@ -48,7 +48,7 @@ public class DeleteController extends HttpServlet {
       FileUtil.deleteFile(req, "/Uploads", saveFileName);
    }
    //삭제가 완료되면 목록으로 이동한다.
-   JSFunction.alertLocation(resp, "삭제되었습니다.", "../board/listPage.do");
+   JSFunction.alertLocation(resp, "삭제되었습니다.", "../board1/listPage1.do");
    }
    //파일 삭제
    public static void deleteFile(HttpServletRequest req,

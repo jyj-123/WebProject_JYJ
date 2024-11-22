@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>자료실 게시판 - 수정하기</title>
+<title>댓글 수정</title>
 
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
@@ -32,36 +31,40 @@
         background-color: #f8f9fa;
     }
     .container {
-        max-width: 800px;
+        width: 50%;
         margin: 50px auto;
         padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border: 1px solid #dee2e6; /* 경계선 추가 */
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     }
     h2 {
+        text-align: center;
+        color: #0073e6;
         font-size: 1.8em;
         margin-bottom: 20px;
     }
     table {
         width: 100%;
-        margin-bottom: 20px;
         border-collapse: collapse;
+        margin-top: 20px;
+    }
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #0073e6;
+        color: white;
     }
     td {
-        padding: 12px;
-        text-align: left;
-        vertical-align: middle;
-        border: 1px solid #dee2e6; /* 테이블 셀 경계선 추가 */
         background-color: #f9f9f9;
     }
-    td:first-child {
-        background-color: #f1f1f1;
-        font-weight: bold;
-        width: 25%;
-    }
-    input[type="text"], textarea, input[type="file"] {
+    input[type="text"], textarea {
         width: 95%;
         padding: 10px;
         border: 1px solid #ccc;
@@ -105,11 +108,6 @@
 
 <script type="text/javascript">
     function validateForm(form) {
-        if (form.title.value.trim() === "") {
-            alert("제목을 입력하세요.");
-            form.title.focus();
-            return false;
-        }
         if (form.content.value.trim() === "") {
             alert("내용을 입력하세요.");
             form.content.focus();
@@ -120,41 +118,22 @@
 </head>
 <body>
 <div class="container">
-    <h2>자료실 게시판 - 수정하기(Edit)</h2>
-    <form name="writeFrm" method="post" enctype="multipart/form-data" action="../board/edit.do" onsubmit="return validateForm(this);">
+    <h2>댓글 수정</h2>
 
-        <!-- 수정할 게시물의 일련번호 -->
-        <input type="hidden" name="idx" value="${ dto.idx }" />
-        <!-- 게시물의 작성자 아이디 -->
-        <input type="hidden" name="id" value="${ dto.id }" />
-        <!-- 기존 게시물의 파일명 -->
-        <input type="hidden" name="prevOfile" value="${ dto.ofile }" />
-        <input type="hidden" name="prevSfile" value="${ dto.sfile }" />
-
-        <table>
+    <form method="post" action="../board2/commentEdit.do" onsubmit="return validateForm(this);">
+        <input type="hidden" name="idc" value="${dto.idc}" />
+        
+        <table width="100%">
             <tr>
-                <td>제목</td>
+                <td>댓글 내용</td>
                 <td>
-                    <input type="text" name="title" value="${ dto.title }" />
-                </td>
-            </tr>
-            <tr>
-                <td>내용</td>
-                <td>
-                    <textarea name="content" rows="5">${ dto.content }</textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>첨부 파일</td>
-                <td>
-                    <input type="file" name="ofile" />
+                    <textarea name="content" style="width: 100%; height: 100px;">${dto.content}</textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="text-align: center;">
-                    <button type="submit">작성 완료</button>
-                    <button type="reset">RESET</button>
-                    <button type="button" onclick="location.href='../board/listPage.do';">목록 바로가기</button>
+                    <button type="submit">댓글 수정 완료</button>
+                    <button type="button" onclick="location.href='../board2/view2.do?idx=${dto.idx}';">취소</button>
                 </td>
             </tr>
         </table>

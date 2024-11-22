@@ -1,4 +1,4 @@
-package model2.mvcboard;
+package model2.mvcboard1;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 //열람하기(어노테이션을 이용한 매핑)
-@WebServlet("/board/view.do")
+@WebServlet("/board1/view1.do")
 public class ViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -58,7 +58,7 @@ public class ViewController extends HttpServlet {
 		
 		//게시물(dto) 저장 후 뷰로 포워드
 		req.setAttribute("dto", dto);
-		req.getRequestDispatcher("/Board/View.jsp").forward(req, resp);
+		req.getRequestDispatcher("/Board1/View1.jsp").forward(req, resp);
 	}
 	
 	public boolean mimeContains(String[] strArr, String ext) {
